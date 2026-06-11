@@ -1,0 +1,23 @@
+
+#root {
+  background-color: #414453;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+#title {
+  color: white;
+  font-weight: bold;
+}
+
+#name {
+  color: white;
+}
