@@ -13,9 +13,7 @@ function State03(){
     // {key:value, key:value, key:[]}
     // [{}, {}, {}]
 
-    return (
-        <div>
-            <button onClick={()=>{
+    const btn_func = ()=>{
                 //배열에 값 추가 : push unshift splice
                 //  [1,2,3,4,5];
                 // arr.push(6); //[1,2,3,4,5, 6] [1,2,3,4,5, 6,6]
@@ -37,7 +35,11 @@ function State03(){
                 arr.push(7);
                 setArr([...arr]);
 
-            }}>배열변경버튼</button>
+            };
+
+    return (
+        <div>
+            <button onClick={btn_func}>배열변경버튼</button>
 
             {
                 arr.map((val)=>{
