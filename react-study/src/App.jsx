@@ -5,6 +5,7 @@ import heroImg from './assets/hero.png'
 // import './App.css'
 import Props01 from './components/Props01'
 import Props02 from './components/Props02'
+import NewsBlog from './newsblog/NewsBlog'
 // import State03 from './components/State03'
 // import Basic01 from './components/Basic01'
 // import State01 from './components/State01'
@@ -22,7 +23,8 @@ function App() {
     // <State02/>
     // <State03/>
     // <Props01/>
-    <Props02/>
+    // <Props02/>
+    <NewsBlog/>
   )
 }
 
