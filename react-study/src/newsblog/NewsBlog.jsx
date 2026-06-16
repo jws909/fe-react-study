@@ -72,6 +72,11 @@ function NewsBlog() {
                 <p>내용자리</p>
             </div> */}
 
+            <div className="black-nav">
+                <h3>Blog Header</h3>
+                <div>React Study</div>
+                <div style={{ color: "orange", fontSize: "20px" }}>{title}</div>
+            </div>
             {
                 news.map((item, index) => {
                     return (
@@ -91,6 +96,32 @@ function NewsBlog() {
                                 setLikeCountArr(temp); 
                             }}>♥</span> {likeCountArr[index]}</h4>
                             <p>내용자리</p>
+                            <button onClick={()=>{
+                                //누른 대상을 삭제
+                                //배열안에 누른 대상의 index 위치에 있는 값을 제거
+
+                                // index
+
+                                // arr.splice(index, 몇개지울, 추가할값)
+
+                                // let temp = [...news];
+                                // temp.splice(index, 1); //1개 삭제
+                                // setNews(temp);
+                                // // temp = [...likeCountArr];
+                                // // temp.splice(index, 1);
+                                // // setLikeCountArr(temp);
+
+                                // //좋아요 갯수 같이 삭제
+                                // likeCountArr.splice(index, 1);
+
+                                let temp = news.filter((value, idx)=>{
+                                    return idx != index;
+                                })
+                                setNews(temp);
+
+                                setLikeCountArr(likeCountArr.filter((_,idx)=>idx != index))
+
+                            }}>삭제</button>
                         </div>
                     )
                 })
