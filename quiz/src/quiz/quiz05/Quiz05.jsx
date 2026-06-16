@@ -1,27 +1,58 @@
-import { useState } from "react";
-import "./Quiz05.css"
+import { useState } from 'react';
+import './Quiz05.css'
 
-function Quiz05() {
+function Quiz05(){
 
-    let [ boxList, setBoxList ] = useState([]);
-    const addBox = () => {
-        let temp = [ ...boxList, 0 ];
-        setBoxList(temp);
-    };
+    let [clrList, setClrList] = useState(['black']);
 
     return (
-        <div>
-            <button onClick={addBox} style={{ margin: "10px" }}>추가</button>
-            <div className="box-con">
+        <>
+            <div className='btn-con'>
+                <button onClick={()=>{
+                    let temp = ['red', ...clrList];
+                    setClrList(temp);
+                }}>앞빨간박스추가</button>
+                <button onClick={()=>{
+                    let temp = ['blue', ...clrList];
+                    setClrList(temp);
+                }}>앞파란박스추가</button>
+                <button onClick={()=>{
+                    let temp = ['green', ...clrList];
+                    setClrList(temp);
+                }}>앞초록박스추가</button>
+                <button onClick={()=>{
+                    let temp = [...clrList, 'red'];
+                    setClrList(temp);
+                }}>뒤빨간박스추가</button>
+                <button onClick={()=>{
+                    let temp = [...clrList, 'blue'];
+                    setClrList(temp);
+                }}>뒤파란박스추가</button>
+                <button onClick={()=>{
+                    let temp = [...clrList, 'green'];
+                    setClrList(temp);
+                }}>뒤초록박스추가</button>
+                <button onClick={()=>{
+                    let temp = [...clrList];
+                    temp.shift();
+                    setClrList(temp);
+                }}>앞 박스 삭제</button>
+                <button onClick={()=>{
+                    let temp = [...clrList];
+                    temp.pop();
+                    setClrList(temp);
+                }}>뒤 박스 삭제</button>
+            </div>
+            <div className='box-con'>
                 {
-                    boxList.map((_, index) => {
+                    clrList.map((color, index)=>{
                         return (
-                            <div className="box" key={index}>박스</div>
+                            <div className="box" style={{backgroundColor:color}} key={index}></div>
                         )
                     })
                 }
             </div>
-        </div>
+        </>
     );
 }
 

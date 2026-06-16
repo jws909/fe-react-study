@@ -25,6 +25,9 @@ function NewsBlog() {
     let [ selectedTitle, setSelectedTitle ] = useState('');
     let [ selectedLikeCount, setSelectedLikeCount ] = useState(0);
 
+    //input 요소에서 입력된 값을 저장하는 용도
+    let [inputText, setInputText] = useState('');
+
     return (
         <div>
             {/* <div className="black-nav">
@@ -72,7 +75,7 @@ function NewsBlog() {
             {
                 news.map((item, index) => {
                     return (
-                        <div className='post-list'>
+                        <div className='post-list' key={index}>
                             <h4 onClick={() => {
                                 
                                 setModalFlag(!modalFlag); //모달창 표시 여부 On/Off     true/false
@@ -98,6 +101,40 @@ function NewsBlog() {
                 temp[0] = 'Today 긴급 속보';
                 setNews(temp);
             }}>긴급제목변경</button>
+
+            <div>
+                <input type='text' id='input_news_title' value={inputText} onChange={(event)=>{
+
+                    //input 창에서 입력이 발생 -> onChange 변경된 함수 -> value값 -> state변수에 저장
+
+                    //console.log(event);
+                    console.log(event.target.value);
+                    setInputText(event.target.value);
+
+                    /*
+                    let input_title = document.getElementById('input_news_title');
+                    let title = input_title.value;
+                    // input 값 처리
+                    input_title.value = '';
+                    */
+                }}/>
+                <button onClick={()=>{
+                    // 발행 버튼 클릭 -> input 입력한 값 state변수에 저장된 값 -> 배열에 등록/추가 처리
+                    
+                    inputText = inputText.trim();
+                    if(inputText != ''){
+                        let temp = [...news];
+                        temp.push(inputText);
+                        setNews(temp);
+                        setLikeCountArr([...likeCountArr, 0]);
+                        // likeCountArr.push(0); //배열 위에 0값 추가
+                    }else{
+                        alert('입력값이 없습니다');
+                    }
+                    
+                    setInputText(''); //입력된 값 제거
+                }}>발행</button>
+            </div>
 
             {/* {
                 modalFlag == true ? <Modal/> : null

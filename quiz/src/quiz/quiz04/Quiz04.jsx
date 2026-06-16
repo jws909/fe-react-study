@@ -1,35 +1,28 @@
-import { useState } from 'react';
-import './Quiz04.css';
+import { useState } from "react";
+import "./Quiz05.css"
 
-function Quiz04() {
-    let title = 'React Study';
+function Quiz05() {
 
-    let newsTitle = [ '오늘의뉴스', '어제의뉴스', '내일의 뉴스' ];
-    let [ likeList, setLikeList ] = useState([ 0, 0, 0 ]);
+    let [ boxList, setBoxList ] = useState([]);
+    const addBox = () => {
+        let temp = [ ...boxList, 0 ];
+        setBoxList(temp);
+    };
 
     return (
         <div>
-            <div className="black-nav">
-                <h3>Blog Header</h3>
-                <div style={{ color: "orange", fontSize: "20px" }}>{title}</div>
+            <button onClick={addBox} style={{ margin: "10px" }}>추가</button>
+            <div className="box-con">
+                {
+                    boxList.map((_, index) => {
+                        return (
+                            <div className="box" key={index}>박스</div>
+                        )
+                    })
+                }
             </div>
-            {
-                newsTitle.map((news,index)=>{
-                    return (
-                        <div className='post-list' key={index}>
-                            <h4>{news} <span onClick={() => {
-                                let temp = [ ...likeList ];
-                                temp[ index ]++;
-                                setLikeList(temp);
-                            }}>♥</span> {likeList[ index ]}</h4>
-                            <p>내용 무</p>
-                        </div>
-                    )
-                })
-            }
-
         </div>
     );
 }
 
-export default Quiz04;
+export default Quiz05;
