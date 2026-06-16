@@ -2,10 +2,11 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
+import FoodMarket from './foodmarket/FoodMarket'
 // import './App.css'
-import Props01 from './components/Props01'
-import Props02 from './components/Props02'
-import NewsBlog from './newsblog/NewsBlog'
+// import Props01 from './components/Props01'
+// import Props02 from './components/Props02'
+// import NewsBlog from './newsblog/NewsBlog'
 // import State03 from './components/State03'
 // import Basic01 from './components/Basic01'
 // import State01 from './components/State01'
@@ -24,7 +25,8 @@ function App() {
     // <State03/>
     // <Props01/>
     // <Props02/>
-    <NewsBlog/>
+    // <NewsBlog/>
+    <FoodMarket/>
   )
 }
 
