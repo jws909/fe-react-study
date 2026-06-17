@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import foodsData from "./data/foodsData";
 import { useState } from "react";
 import { Container, Nav, Navbar } from 'react-bootstrap';
+import Detail from './pages/Detail';
 
 function FoodMarket() {
 
@@ -25,12 +26,12 @@ function FoodMarket() {
 
             <Navbar bg="light" data-bs-theme="light">
                 <Container>
-                    <Navbar.Brand onClick={()=>{navigate("/")}}>FoodMarket</Navbar.Brand>
+                    <Navbar.Brand onClick={() => { navigate("/") }}>FoodMarket</Navbar.Brand>
                     <Nav className="me-auto">
-                        <Nav.Link><Link to="/">Home</Link></Nav.Link>
-                        <Nav.Link onClick={()=>{navigate("/detail")}}>FoodDetail</Nav.Link>
-                        <Nav.Link onClick={()=>{navigate("/info")}}>Info</Nav.Link>
-                        <Nav.Link onClick={()=>{navigate("/help")}}>고객센터</Nav.Link>
+                        <Nav.Link as={Link} to={"/"}>Home</Nav.Link>
+                        <Nav.Link onClick={() => { navigate("/detail") }}>FoodDetail</Nav.Link>
+                        <Nav.Link onClick={() => { navigate("/info") }}>Info</Nav.Link>
+                        <Nav.Link onClick={() => { navigate("/help") }}>고객센터</Nav.Link>
                     </Nav>
                 </Container>
             </Navbar>
@@ -38,7 +39,8 @@ function FoodMarket() {
             <Routes>
                 <Route path='/' element={<Home foods={foods} />} />
                 <Route path='/help' element={<CustomerService />} />
-                <Route path='/detail' element={<div><h1>detail page</h1></div>} />
+                <Route path='/detail/:id' element={<Detail foods={foods}/>} />
+                {/* <Route path='/detail' element={<div><h1>detail page</h1></div>} /> */}
                 <Route path='/info' element={<div><h1>info page</h1></div>} />
                 <Route path='/*' element={<div><h1>잘못된 접근입니다.</h1></div>} />
             </Routes>
