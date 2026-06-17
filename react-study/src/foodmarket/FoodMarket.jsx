@@ -4,13 +4,20 @@ import './FoodMarket.css';
 // import Container from 'react-bootstrap/Container';
 // import Nav from 'react-bootstrap/Nav';
 // import Navbar from 'react-bootstrap/Navbar';
-import { Container, Nav, Navbar, Row, Col, Card, Button } from 'react-bootstrap';
-import banner_bg from './img/banner_bg.jpg';
-import food1 from './img/food1.jpg';
-import food2 from './img/food2.jpg';
-import food3 from './img/food3.jpg';
+import { Container, Nav, Navbar, Row, Col, Button } from 'react-bootstrap';
+// import banner_bg from './img/banner_bg.jpg';
+// import food1 from './img/food1.jpg';
+// import food2 from './img/food2.jpg';
+// import food3 from './img/food3.jpg';
+
+// 화면에 보여주는 푸드 정보 기준 data import
+import foodsData from './data/foodsData';
+import { useState } from 'react';
+import FoodCard from './components/FoodCard';
 
 function FoodMarket() {
+
+    let [ foods, setFoods ] = useState(foodsData);
 
     return (
         <div>
@@ -29,13 +36,34 @@ function FoodMarket() {
             {/*
                 이미지 사용
                 
-                상대경로 사용 XXX
+                1. css 에서 사용
+                    이미지 경로 (상대경로 ./img/...)
+                
+                2. js(jsx) 에서 사용
+
+                상대경로 연결 사용 XXX
                 <img src="../../image.menu.png"/> XXX
 
 
                 react 컴포넌트에서 이미지 사용시, import -> 사용
                 <img src="https://...외부url"/>
                 <img src={import한이미지}/>
+
+                3. public 폴더에 이미지를 미리 저장해놓고 사용
+                현재 실행중인 서버가 public 경로를 통해 image 에 접근할 수 있는 서버 역할
+                이미지 외부url에 접근해서 사용하듯이...사용
+
+                <img src={'http://localhost:5173/images/food1.jpg'} />
+                <img src={'/images/food1.jpg'} />
+
+                CRA     :   <img src={ process.env.PUBLIC_URL + '/images/food1.jpg'} />
+                            package.json
+                            "homepage":"/detailServicePath" 상세경로설정
+
+                Vite    :   <img src={ import.meta.env.BASE_URL + '/images/food1.jpg'} />
+                            vite.config.js
+                            base: "detailServicePath/" 상세경로설정 
+
             */}
 
             {/* <img src={banner_bg} /> */}
@@ -47,44 +75,15 @@ function FoodMarket() {
             */}
             <Container>
                 <Row>
-                    <Col md={4} sm={2}>
-                        <Card style={{ width: '18rem' }}>
-                            <Card.Img variant="top" src={food1} />
-                            <Card.Body>
-                                <Card.Title>카드 타이틀 div태그</Card.Title>
-                                <Card.Text>
-                                    내부 내용쓰는 곳. p태그 인식
-                                </Card.Text>
-                                <Button variant="primary">Go somewhere</Button>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col md={4} sm={2}>
-                        <Card style={{ width: '18rem' }}>
-                            <Card.Img variant="top" src={food2} />
-                            <Card.Body>
-                                <Card.Title>Card Title</Card.Title>
-                                <Card.Text>
-                                    Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.
-                                </Card.Text>
-                                <Button variant="primary">Go somewhere</Button>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col md={4} sm={2}>
-                        <Card style={{ width: '18rem' }}>
-                            <Card.Img variant="top" src={food3} />
-                            <Card.Body>
-                                <Card.Title>Card Title</Card.Title>
-                                <Card.Text>
-                                    Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.
-                                </Card.Text>
-                                <Button variant="primary">Go somewhere</Button>
-                            </Card.Body>
-                        </Card>
-                    </Col>
+                    {
+                        foods.map((food, index) => {
+                            return (
+                                <Col md={4} sm={2} key={index}>
+                                    <FoodCard food={food} />
+                                </Col>
+                            )
+                        })
+                    }
                 </Row>
             </Container>
 
