@@ -27,6 +27,8 @@ function Detail({ foods }) {
     let [ orderCount, setOrderCount ] = useState(0);
     let [ test, setTest ] = useState(0);
 
+    let [ orderButton, setOrderButton ] = useState('');
+
     useEffect(() => {
         console.log('useEffect 함수 실행 (의존성 배열 없음)')
     })  //의존성배열X -> 로딩될때마다 매번 실행
@@ -111,6 +113,14 @@ function Detail({ foods }) {
 
     //filter
     let food = foods.find((item) => item.id == id);
+    
+    useEffect(()=>{
+        if(food.stockCount == 0){
+            setOrderButton(<Button variant="secondary" disabled="true">품절</Button>)
+        }else{
+            setOrderButton(<Button variant="primary">주문하기</Button>)
+        }
+    },[])
 
     let foodIndex = foods.findIndex((item) => item.id == id);
     //foods[foodIndex].title
@@ -140,15 +150,17 @@ function Detail({ foods }) {
                     <p>{food.price}</p>
 
                     <p>
-                        <Button variant="dard" onClick={() => { setOrderCount(orderCount - 1) }}>-</Button>
+                        <Button variant="dard" onClick={() => { 
+                            (orderCount > 0) && setOrderCount(orderCount - 1)
+                        }}>-</Button>
                         <span> {orderCount} </span>
                         <Button variant="dard" onClick={() => {
-                            setOrderCount(orderCount + 1)
-                            console.log('onCLick() : ' + orderCount);
+                            (food.stockCount > orderCount) && setOrderCount(orderCount + 1)
                         }}>+</Button>
                     </p>
-
-                    <Button variant="primary">주문하기</Button>
+                    
+                    {orderButton}
+                    {/* <Button variant="primary">주문하기</Button> */}
                 </Col>
             </Row>
 
