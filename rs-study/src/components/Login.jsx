@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { saveUserId, clearUserId } from '../store/store';
+import { saveUserId, clearUserId, saveUserInfo, setWeatherInfo } from '../store/store';
 
 function Login() {
 
@@ -45,6 +45,8 @@ function Login() {
     // let navigate = useNavigate();
     // navigate("/main");
 
+    let weather = useSelector((state)=>{return state.weather}); //store 에 등록된 weather 상태값
+    console.log(weather);
 
     return (
         <div>
@@ -59,7 +61,15 @@ function Login() {
 
                     <button onClick={()=>{
                         dispatch(clearUserId());
-                    }}>ClearUserId호출</button>  
+                    }}>ClearUserId호출</button>
+
+                    <button onClick={()=>{
+                        dispatch(saveUserInfo({id:'abcd', name:'aab'}));
+                    }}>SaveUserInfo호출</button>
+
+                    <button onClick={()=>{
+                        dispatch(setWeatherInfo({weather : 'cloudy', temp: 15, hmdt: 40}));
+                    }}>SetWeatherInfo호출</button>
                 </div>
             </div>
 
@@ -173,7 +183,12 @@ function Login() {
                         // localStorage.setItem(key, value);
                         // localStorage.getItem(key)
                         // localStorage.removeItem(key)
-                        localStorage.setItem("token", token);
+                        localStorage.setItem("token", token);  //토큰 저장
+
+                        //어떤 사용자가 로그인한 상태인가? -> 유지 -> 전역상태관리에 등록
+                        dispatch( saveUserId(id) );
+
+                        //다른 페이지에서는 userid로 확인
                     }
                     
                     //로그인 성공? 실패? 확인 -> 이후 처리
