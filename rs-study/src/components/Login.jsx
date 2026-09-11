@@ -1,13 +1,68 @@
 import axios from "axios";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { saveUserId, clearUserId } from '../store/store';
 
 function Login() {
+
+    /* 
+        로그인 시도 -> BE API -> 성공결과 응답 -> 성공하면 accessToken
+
+        로그인성공? -> accessToken 저장
+                    -> 로그인한 사용자 정보 전역상태관리(redux)에 등록 사용
+
+        페이지 이동 등 다른페이지에서도 로그인여부 체크? --> redux 등록된 사용자 정보
+
+        리덕스툴킷(redux toolkit) 라이브러리 설치
+
+        npm install @reduxjs/toolkit
+        npm install react-redux
+
+    */
 
     let [id, setId] = useState('');
     let [pw, setPw] = useState('');
 
+
+
+    // redux 개념 적용
+    // redux 에 저장된 상태값에 접근 사용
+
+    let reduxState = useSelector((state)=>{return state});
+
+    console.log(reduxState);
+    console.log(reduxState.user);
+
+    let user = useSelector((state)=>{return state.user}); //getter 값을 읽어오기
+    console.log(user);
+
+
+    // redux 저장용으로 전체 상태관리 store 에 등록된 slice 값을 변경하는 action을 담는 함수를 호출하려면?
+    // 단순함수호출X -> dispatch 에 감싸서 요청!    dispatch( 호출할함수(매개변수) )
+
+    let dispatch = useDispatch();
+
+    // let navigate = useNavigate();
+    // navigate("/main");
+
+
     return (
         <div>
+
+            <div>
+                <h3>redux 값 테스트</h3>
+                <div>
+                    <button onClick={()=>{
+                        //saveUserId('abcd'); 단순함수호출XX
+                        dispatch(saveUserId('abcd')); // redux 관련 action 생성 호출
+                    }}>SaveUserId호출</button>
+
+                    <button onClick={()=>{
+                        dispatch(clearUserId());
+                    }}>ClearUserId호출</button>  
+                </div>
+            </div>
+
             <h1>React Spring API Login</h1>
 
             <p>id : <input type="text" onChange={(e)=>{
