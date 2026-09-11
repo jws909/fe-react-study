@@ -1,7 +1,9 @@
 import axios from "axios";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { saveUserId, clearUserId, saveUserInfo, setWeatherInfo } from '../store/store';
+// import { saveUserId, clearUserId, saveUserInfo, setWeatherInfo } from '../store/store';
+import { saveUserId, clearUserId, saveUserInfo } from "../store/userSlice";
+import { setWeatherInfo } from "../store/weatherSlice";
 
 function Login() {
 
